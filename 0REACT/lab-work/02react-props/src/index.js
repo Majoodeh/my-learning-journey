@@ -25,4 +25,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-//  const { name, src, alt, number, email } = props;
+
