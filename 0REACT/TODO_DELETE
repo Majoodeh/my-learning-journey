@@ -1,0 +1,55 @@
+1. The Favourites Context (The "Brain")
+[ ] Create a FavouritesContext.js file.
+
+[ ] Initialize an array state to store only IDs (not full objects).
+
+[ ] Create a Toggle Function (logic to add an ID if it's missing, or remove it if it exists).
+
+[ ] Wrap the entire App in the FavouritesProvider (likely in main.jsx or App.jsx).
+
+✅ 2. The Navigation & Routing
+[ ] Install and set up react-router-dom.
+
+[ ] Create a Navigation Bar component at the top of the app.
+
+[ ] Link 1: Handles routing to / (Home/Product List).
+
+[ ] Link 2: Handles routing to /favourites (Favourites Page).
+
+✅ 3. Product List & Details (The "Hearts")
+[ ] Add a heart icon (SVG) to every product card in the Product List.
+
+[ ] Add a heart icon (SVG) to the Product Details page.
+
+[ ] Logic: The heart should display a different SVG (filled vs. outline) based on whether the product's ID is in the Context.
+
+[ ] Action: Clicking the heart must update the Context array via the toggle function.
+
+✅ 4. The useFetch Custom Hook
+[ ] Create a useFetch hook to handle loading, error, and data states.
+
+[ ] Dynamic URL: Ensure the hook re-fetches when the category URL changes.
+
+[ ] Challenge: Add logic to handle multiple fetches if the input is an array of URLs (using Promise.all).
+
+[ ] Replace all manual fetch calls in Home.jsx and ProductDetails.jsx with your new hook.
+
+✅ 5. The Favourites Page
+[ ] Create a new page component for the /favourites route.
+
+[ ] Retrieve the array of IDs from the Favourites Context.
+
+[ ] Convert those IDs into an array of API URLs.
+
+[ ] Use your useFetch hook to fetch all favourited products simultaneously.
+
+[ ] Map through the resulting data to display the list of favourite products.
+
+✅ 6. Deployment & Submission
+[ ] Deploy the app to Netlify (or a similar service).
+
+[ ] Ensure the site works (check if the /favourites page loads correctly on refresh).
+
+[ ] Submit the Netlify Link and the GitHub PR Link.
+
+[ ] Ensure this deployment is a different link than your previous week's assignment.
