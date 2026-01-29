@@ -139,4 +139,186 @@ In tsconfig.json,there are several strictness flags that can be enabled to enfor
 
 In TypeScript, parameters (inputs) are **required** by default. If a function asks for two things, you must give it two things, otherwise, the "blueprint" is broken.
 
-Once a parameter is optional, all parameters after it must also be optional.
+To make a parameter optional, you can add a question mark `?` after the parameter name in the function declaration.
+
+`function showData(user: string, age: number, country?: string) {... }`
+
+- Once a parameter is optional, all parameters after it must also be optional.
+
+## Function Rest Parameters
+
+Rest parameters allow a function to accept an indefinite number of arguments as an array. This is useful when you don't know in advance how many arguments will be passed to the function.
+`function sumAll(...numbers: number[]): number { ... }`
+
+## Syntax in Anonymous and Arrow Functions
+
+```// Anonymous Function
+const add = function (num1: number, num2: number): number {
+  return num1 + num2;
+};
+```
+
+```// Arrow Function
+const add = (num1: number, num2: number): number => {
+  return num1 + num2;
+};
+```
+
+## Data Types - Type Alias
+
+Why to use Type Alias?
+Type aliases allow you to create a new name for a type.
+
+It allows defining types with a custom name, and this type can then be used by different variables, function parameters, or return types.
+
+```typescript
+type Car = {
+  year: number;
+  type: string;
+  model: string;
+};
+let car1: Car = { year: 2020, type: "Sedan", model: "Toyota" };
+let car2: Car = { year: 2018, type: "SUV", model: "Honda" };
+```
+
+### How to defdine an alias?
+
+using the word `type` followed by the name of the alias and the type it represents.
+
+`type AliasName = existingType;`
+
+### Advanced use, Object Aliases
+
+The power of aliases comes when we define complex object, like making a blueprint for an object structure.
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  isEmployed: boolean;
+};
+let employee: Person = {
+  name: "Alice",
+  age: 30,
+  isEmployed: true,
+};
+let student: Person = {
+  name: "Bob",
+  age: 20,
+  isEmployed: false,
+};
+```
+
+We can also extend an alias using intersection types `&`.
+
+`Extending` means creating a new type that includes all properties of the original type plus additional properties.
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+  isEmployed: boolean;
+};
+
+type Employee = Person & {
+  employeedId: number;
+  department: string;
+};
+```
+
+### Literal Types:
+
+Literal types allow you to specify exact values a variable can hold, rather than just a general type.
+
+```typescript
+type Direction = "North" | "South" | "East" | "West";
+let move: Direction;
+move = "North"; // Valid
+move = "Up"; // Error: Type '"Up"' is not assignable to type 'Direction'.
+```
+
+## Tuples
+
+It is a typed array with a fixed number of elements where each element can have a different type.
+
+so ecah element has a specific type and position in the array. if string is first, number is second, boolean is third, etc. you can not change the order or the type of each element.
+so `["Hello", 42, true]` is valid for `[string, number, boolean]`, but `[42, "Hello", true]` is not.
+
+how to declare a tuple:
+`let tupleName: [type1, type2, ...] = [value1, value2, ...];`
+Example:
+
+```typescript
+type user = [string, number, boolean];
+student: user = ["Majd", 25, true];
+// or
+let student: [string, number, boolean] = ["Majd", 30, true];
+```
+
+`student` is an array so we can use array methods on it.
+To make it read-only, we can use the `readonly` modifier.
+
+```typescript
+type user = readonly [string, number, boolean];
+let student: user = ["Ali", 25, true];
+```
+
+Note:
+There are differnt ways to define tuples in TypeScript.
+
+```typescript
+let myTuple: [string, number]; // myTuple is a variable of type tuple with a string and a number
+// you cant do this:
+user: myTuple = ["Majd", 30]; //! Error: 'user' is not defined
+
+type MyTupleType = [string, number]; // this defines a type alias 'MyTupleType' for a tuple with a string and a number
+
+// you can do this:
+let user: MyTupleType = ["Majd", 30]; // user is a variable of type MyTupleType
+```
+
+Destructuring Tuples:
+
+```typescript
+type User = [string, number, boolean];
+let user: User = ["Alice", 30, true];
+let [name, age, isEmployed] = user;
+console.log(name); // "Alice"
+```
+
+## Void & Never Types
+
+`Void Type`:
+It is used to indicate that a funvtion does not turn a value.
+It is a standard way to tell that a function is intended to perform an action without producing a result.
+actions( logging to a console or saving to database or modifying a global variable).
+
+Usually if a function does not return anything, javaScript and TypeScript implicitly return `undefined`.
+
+```typescript
+function logMessage(message: string): void {
+  console.log(message);
+  // No return statement here
+}
+
+const result = logMessage("Hello!");
+// 'result' is typed as void; you can't do anything with it.
+```
+
+- What cases `void` is useful?
+  - - Event Handlers: functions that respond to user actions, like button clicks.
+  - Logging Functions: functions that log information to the console or a file.
+  - Functions with side effects: functions that modify global state or perform actions without returning a value.
+
+`Never Type`:
+It is a type for values that should never exist.
+
+when does `Nothing` happen in code?
+
+1. Funvtion that never finishes (crashes or infinite loop).
+2. Function that always throws an error.
+3. Impossible type scenarios (like a variable that can never have a valid value). (when a function handeled every possible case and there is litirally nothing left)
+
+```typescript
+
+```
